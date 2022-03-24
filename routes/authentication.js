@@ -1,11 +1,12 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { User, ErrorResponse } = require('../model');
 const { isEmail, isAlpha, isStrongPassword } = require('validator');
 
 
 const router = require('express').Router();
 
-const { HASH_SALT } = process.env;
+const { HASH_SALT, TOKEN_EXPIRES_IN_HOUR, AUTH_TOKEN_SECRET } = process.env;
 
 // Register new User
 router.post("/register", async (req, res, next) => {
@@ -16,7 +17,7 @@ router.post("/register", async (req, res, next) => {
 
         // Get user input
         const { firstName, lastName, email, password } = req.body;
-        const { isValidEmail, isValidPassword, isValidFirstName, isValidLastName } = [isEmail(email), isStrongPassword(password), isAlpha(firstName), isAlpha(lastName)];
+        const [isValidEmail, isValidPassword, isValidFirstName, isValidLastName] = [isEmail(email), isStrongPassword(password), isAlpha(firstName), isAlpha(lastName)];
 
         if (!(isValidFirstName && isValidLastName && isValidEmail && isValidPassword))
             throw new ErrorResponse(400, {
@@ -55,8 +56,37 @@ router.post("/register", async (req, res, next) => {
 });
 
 // Validates user login credentials
-router.post("/", async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
     try {
+        const { email, password } = req.body;
+
+        // Validate user input
+        if (!(email && password))
+            throw new ErrorResponse(400, "All input is required");
+
+        // Validate if user exist in our database
+        const user = await User.findOne({ Email: email }).exec();
+
+        if (!(user && bcrypt.compareSync(password, user.Password)))
+            throw new ErrorResponse(401, "Invalid Credentials");
+
+        expireHour = parseInt(TOKEN_EXPIRES_IN_HOUR);
+        // Create token
+        const token = jwt.sign(
+            { id: user.id },
+            AUTH_TOKEN_SECRET,
+            {
+                expiresIn: `${expireHour}h`,
+            }
+        );
+
+        console.log(`Login User-${user._id}-Success`);
+
+        res.cookie('token', token, {
+            expires: new Date(Date.now() + (expireHour * 60 * 60 * 1000)), // time until expiration
+            secure: false, // set to true if  using https
+            httpOnly: true,
+        }).sendStatus(200);
 
     }
     catch (e) {

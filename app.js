@@ -12,15 +12,12 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Controllers
 app.use("/", Controller.AuthenticationController);
 
 
 app.use(Middleware.ErrorHandler);
 
-
 const { APP_PORT } = process.env;
-const port = APP_PORT || 3000;
-app.listen(port, function () {
-    console.log(`Example app listening on port ${port}!`)
-});
-
+const port = APP_PORT || 8080;
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
