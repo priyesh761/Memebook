@@ -4,7 +4,7 @@
   "description": "Meme Sharing Site",
   "main": "app.js",
   "scripts": {
-    "test": "jest --silent --forceExit --coverage --runInBand",
+    "test": "jest --silent --verbose --forceExit --coverage --runInBand",
     "start": "node app.js"
   },
   "repository": {

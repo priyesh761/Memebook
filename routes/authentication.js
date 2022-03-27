@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { Authorize } = require('../middleware');
 const { User, ErrorResponse } = require('../model');
 const { isEmail, isAlpha, isStrongPassword } = require('validator');
 
@@ -92,11 +93,16 @@ router.post("/login", async (req, res, next) => {
     }
 });
 
-// Validates user login credentials
-router.post("/delete", async (req, res, next) => {
+// Delete user
+router.delete("/delete", Authorize, async (req, res, next) => {
+
     try {
+        let isDeleted = await User.deleteOne({ _id: req.user.id });
+        if (isDeleted.deletedCount == null || isDeleted.deletedCount == 0)
+            throw new ErrorResponse(400, "Invalid User");
 
-
+        res.clearCookie("token");
+        res.status(200).json({ message: "User successfully deleted" });
     }
     catch (e) {
         next(e);

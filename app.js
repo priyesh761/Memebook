@@ -28,6 +28,7 @@ const port = APP_PORT || 8080;
 
 var db = mongoose.connection;
 
-db.once('open', () => app.listen(port, () => console.log(`Example app listening on port ${port}!`)));
+if (process.env.NODE_ENV != "Test")
+    db.once('open', () => app.listen(port, () => console.log(`Example app listening on port ${port}!`)));
 
-module.exports = app
+module.exports = app;
