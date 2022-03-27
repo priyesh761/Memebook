@@ -87,6 +87,7 @@ describe('Authentication Controller', () => {
     expect(response.body.message).toBeDefined();
 
   });
+
   test('RegisterUser-Fail-NoUserSent', async () => {
 
     const response = await request(app)
@@ -96,6 +97,7 @@ describe('Authentication Controller', () => {
     expect(response.body.message).toBeDefined();
 
   });
+
   test('RegisterUser-Fail-InvalidData', async () => {
 
     const response = await request(app)

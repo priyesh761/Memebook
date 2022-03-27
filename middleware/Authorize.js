@@ -1,4 +1,3 @@
-const { JsonWebTokenError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 const { ErrorResponse } = require("../model");
 
@@ -17,8 +16,6 @@ const verifyToken = async (req, res, next) => {
         };
 
     } catch (err) {
-        if (err instanceof JsonWebTokenError)
-            next(new ErrorResponse(401, "Your Login Session has expired"));
         next(err);
     }
     next();
