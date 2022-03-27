@@ -1,0 +1,31 @@
+{
+    "RegisterUserData": {
+        "email": "test@gmail.com",
+        "password": "Test@1234",
+        "firstName": "TestFName",
+        "lastName": "TestLName"
+    },
+    "InvalidRegisterUserData": {
+        "email": "testgmail.com",
+        "password": "tet134",
+        "firstName": "Test12FName",
+        "lastName": "Test12LName"
+    },
+    "LoginUserData": {
+        "email": "test@gmail.com",
+        "password": "Test@1234"
+    },
+    "InvalidLoginUserData": {
+        "email": "test@gmail.com",
+        "password": "WrongPassword"
+    },
+    "ExpiredTokenCookie": "[\"token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDAxNzdmN2E4ODRjYzQyOWRjMzM3MiIsImlhdCI6MTY0ODM3MjIwOSwiZXhwIjoxNjQ4Mzc5NDA5fQ.OIOQtC84oF4ph7DRHQsdzmmk40ZAr5HW7-JyvD_uI8E; Path=/; Expires=Sun, 27 Mar 2022 11:10:09 GMT; HttpOnly\"]",
+    "FindUserResponse": {
+        "_id": "623d9386a1ae8ae5b9734cb1",
+        "FirstName": "TestFName",
+        "LastName": "TestLName",
+        "Email": "test@gmail.com",
+        "Password": "$2b$07$IO4sVwvktUjXNJli6fcDH.Ge1UbdxegvjWSFMvto33yc/PYNn5ywW",
+        "__v": 0
+    }
+}
