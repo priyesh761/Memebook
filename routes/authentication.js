@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const { User, ErrorResponse } = require('../model');
 const { isEmail, isAlpha, isStrongPassword } = require('validator');
 
-
 const router = require('express').Router();
 
 const { HASH_SALT, TOKEN_EXPIRES_IN_HOUR, AUTH_TOKEN_SECRET } = process.env;
@@ -29,7 +28,6 @@ router.post("/register", async (req, res, next) => {
 
         // check if user already exist
         const oldUser = await User.findOne({ Email: email }).exec();
-
         // Validate if user exist in our database
         if (oldUser != null)
             throw new ErrorResponse(409, "User Already Exist. Please Login");
@@ -87,6 +85,17 @@ router.post("/login", async (req, res, next) => {
             secure: false, // set to true if  using https
             httpOnly: true,
         }).sendStatus(200);
+
+    }
+    catch (e) {
+        next(e);
+    }
+});
+
+// Validates user login credentials
+router.post("/delete", async (req, res, next) => {
+    try {
+
 
     }
     catch (e) {

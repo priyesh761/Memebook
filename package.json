@@ -4,7 +4,7 @@
   "description": "Meme Sharing Site",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --silent --forceExit --coverage --runInBand",
     "start": "node app.js"
   },
   "repository": {
@@ -21,6 +21,7 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
     "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
@@ -28,7 +29,10 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.1",
     "jest": "^27.5.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "path": "^0.12.7",
+    "supertest": "^6.2.2"
   }
 }

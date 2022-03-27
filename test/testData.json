@@ -1,0 +1,20 @@
+{
+    "RegisterUserData": {
+        "email": "test@gmail.com",
+        "password": "Test@1234",
+        "firstName": "TestFName",
+        "lastName": "TestLName"
+    },
+    "LoginUserData": {
+        "email": "test@gmail.com",
+        "password": "Test@1234"
+    },
+    "FindUserResponse": {
+        "_id": "623d9386a1ae8ae5b9734cb1",
+        "FirstName": "TestFName",
+        "LastName": "TestLName",
+        "Email": "test@gmail.com",
+        "Password": "$2b$07$IO4sVwvktUjXNJli6fcDH.Ge1UbdxegvjWSFMvto33yc/PYNn5ywW",
+        "__v": 0
+    }
+}
